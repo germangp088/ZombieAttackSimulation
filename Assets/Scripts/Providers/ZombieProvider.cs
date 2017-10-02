@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZombieProvider : MonoBehaviour, Provider
 {
-    private List<GameObject> zombies = new List<GameObject>();
+    [SerializeField]private List<GameObject> zombies = new List<GameObject>();
     void Start () {
         foreach (Zombie zombie in FindObjectsOfType(typeof(Zombie)))
         {
@@ -19,6 +19,15 @@ public class ZombieProvider : MonoBehaviour, Provider
     public GameObject GetRandomGO()
     {
         return zombies[Random.Range(0, zombies.Count)];
+    }
+
+    /// <summary>
+    /// Obtiene la cantidad de zombies de la lista.
+    /// </summary>
+    /// <returns></returns>
+    public int GetCount()
+    {
+        return zombies.Count;
     }
 
     /// <summary>

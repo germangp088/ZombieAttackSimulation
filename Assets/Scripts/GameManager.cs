@@ -1,21 +1,66 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
     private HumanoProvider _humanoProvider;
     private ZombieProvider _zombieProvider;
     private WaitForEndOfFrame wait = new WaitForEndOfFrame();
+    public Text zombieText;
+    public Text humanoText;
+    public Text endText;
+    public Text instrucciones;
+    private bool end;
+
     void Start()
     {
+        end = false;
         StartCoroutine(Initialize());
     }
-    
+
     void Update()
     {
-        if (_humanoProvider.IsEmpty()) {
-
+        if (!end)
+        {
+            if (_humanoProvider.IsEmpty())
+            {
+                end = true;
+                GetComponent<AudioManager>().PlayAudio("Jingle_Lose_00", 3.8f);
+                endText.text = "EXTERMINIO!!!";
+                instrucciones.text = "Reiniciar (ENTER) Salir (ESC)";
+            }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+        }
+    }
+
+    public void UpdateUI()
+    {
+        UpdateZombieUI();
+        UpdateHumanoUI();
+    }
+
+    private void UpdateZombieUI()
+    {
+        zombieText.text = _zombieProvider.GetCount().ToString();
+    }
+
+    private void UpdateHumanoUI()
+    {
+        humanoText.text = _humanoProvider.GetCount().ToString();
     }
 
     private IEnumerator Initialize()
@@ -25,6 +70,10 @@ public class GameManager : MonoBehaviour {
         ActivateNPC(_humanoProvider.GetList());
         yield return wait;
         ActivateNPC(_zombieProvider.GetList());
+        yield return wait;
+        UpdateZombieUI();
+        yield return wait;
+        UpdateHumanoUI();
     }
 
     private void ActivateProviders()

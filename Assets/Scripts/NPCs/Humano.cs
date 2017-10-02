@@ -10,7 +10,8 @@ public class Humano : MonoBehaviour, NPC
     private Animator animator;
     private IEnumerable<string> animations;
 
-    void Start () {
+    void Start()
+    {
         animator = GetComponent<Animator>();
         animations = new string[] { "Walk", "SprintJump" };
         _speed = 5;
@@ -19,8 +20,9 @@ public class Humano : MonoBehaviour, NPC
         _sm.AddState(new WanderState(_sm, this));
         _sm.SetState<WanderState>();
     }
-	
-	void Update () {
+
+    void Update()
+    {
         _sm.Update();
     }
 
@@ -28,7 +30,8 @@ public class Humano : MonoBehaviour, NPC
     /// Cambio de estado a FleeState.
     /// </summary>
     /// <param name="zombie">Zombie persiguiendo al humano.</param>
-    public void Flee(GameObject zombie){
+    public void Flee(GameObject zombie)
+    {
         if (!_sm.IsActualState<FleeState>())
         {
             _zombie = zombie;
@@ -41,17 +44,20 @@ public class Humano : MonoBehaviour, NPC
     /// </summary>
     public void Die(Zombie zombie)
     {
-        FindObjectOfType<AudioManager>().PlayAudio("Scream_Male_02");
+        GetComponent<AudioManager>().PlayAudio("Scream_Male_02");
         FindObjectOfType<HumanoProvider>().RemoveGO(gameObject);
-        Zombie clone = Instantiate(zombie,transform.position,Quaternion.identity);
+        Zombie clone = Instantiate(zombie, transform.position, Quaternion.identity);
+        Instantiate(FindObjectOfType<SangreProvider>().GetRandomGO(), transform.position, Quaternion.identity);
         FindObjectOfType<ZombieProvider>().AddGO(clone.gameObject);
         Destroy(gameObject);
+        FindObjectOfType<GameManager>().UpdateUI();
     }
 
     /// <summary>
     /// Setea al humano con wander state.
     /// </summary>
-    public void Wander() {
+    public void Wander()
+    {
         if (!_sm.IsActualState<WanderState>())
         {
             _zombie = null;
@@ -63,7 +69,8 @@ public class Humano : MonoBehaviour, NPC
     /// Devuelve la velocidad del humano.
     /// </summary>
     /// <returns></returns>
-    public float GetSpeed(){
+    public float GetSpeed()
+    {
         return _speed;
     }
 
@@ -71,7 +78,8 @@ public class Humano : MonoBehaviour, NPC
     /// Obtiene el zombie que persigue al humano.
     /// </summary>
     /// <returns>Zombie</returns>
-    public GameObject GetZombie(){
+    public GameObject GetZombie()
+    {
         return _zombie;
     }
 

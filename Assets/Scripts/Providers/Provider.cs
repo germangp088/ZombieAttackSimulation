@@ -25,4 +25,9 @@ public interface Provider {
     /// </summary>
     /// <param name="go"></param>
     void AddGO(GameObject go);
+    /// <summary>
+    /// Obtiene la cantidad de objetos de la lista.
+    /// </summary>
+    /// <returns></returns>
+    int GetCount();
 }

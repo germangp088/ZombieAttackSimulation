@@ -12,6 +12,17 @@ public class AudioManager : MonoBehaviour {
     public void PlayAudio(string clipName)
     {
         AudioSource audio = GetComponent<AudioSource>();
-        audio.PlayOneShot(audios.Find(x => x.name == clipName));
+        audio.PlayOneShot(GetAudioclip(clipName));
+    }
+
+    public void PlayAudio(string clipName, float volumeScale)
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.PlayOneShot(GetAudioclip(clipName), volumeScale);
+    }
+
+    private AudioClip GetAudioclip(string clipName)
+    {
+        return audios.Find(x => x.name == clipName);
     }
 }

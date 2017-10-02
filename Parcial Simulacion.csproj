@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Providers\HumanoProvider.cs" />
     <Compile Include="Assets\Scripts\Providers\Provider.cs" />
     <Compile Include="Assets\Scripts\Providers\PuntoProvider.cs" />
+    <Compile Include="Assets\Scripts\Providers\SangreProvider.cs" />
     <Compile Include="Assets\Scripts\Providers\ZombieProvider.cs" />
     <Compile Include="Assets\Scripts\StateScripts\NPCState\NPCState.cs" />
     <Compile Include="Assets\Scripts\StateScripts\NPCState\WanderState.cs" />

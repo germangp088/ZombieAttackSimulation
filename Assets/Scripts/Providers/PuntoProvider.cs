@@ -21,6 +21,15 @@ public class PuntoProvider : MonoBehaviour, Provider
     }
 
     /// <summary>
+    /// Obtiene la cantidad de puntos de la lista.
+    /// </summary>
+    /// <returns></returns>
+    public int GetCount()
+    {
+        return puntos.Count;
+    }
+
+    /// <summary>
     /// Obtiene lista de puntos.
     /// </summary>
     /// <returns></returns>

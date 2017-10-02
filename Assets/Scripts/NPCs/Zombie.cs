@@ -33,7 +33,7 @@ public class Zombie : MonoBehaviour, NPC
     void Update()
     {
         if (Random.Range(0, 2000) < 15)
-            FindObjectOfType<AudioManager>().PlayAudio("Zombie_03");
+            GetComponent<AudioManager>().PlayAudio("Zombie_03");
 
         if (_sm.IsActualState<WanderState>())
         {
@@ -115,7 +115,7 @@ public class Zombie : MonoBehaviour, NPC
             else
             {
                 Animate("attack");
-                FindObjectOfType<AudioManager>().PlayAudio("bloodfx10");
+                GetComponent<AudioManager>().PlayAudio("bloodfx10");
                 _humano.SendMessage("Die", this);
                 _humano = null;
                 _sm.CleanState();

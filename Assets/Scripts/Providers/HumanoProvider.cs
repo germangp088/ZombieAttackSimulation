@@ -1,13 +1,24 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class HumanoProvider : MonoBehaviour, Provider {
-    private List<GameObject> humanos = new List<GameObject>();
-    void Start () {
+public class HumanoProvider : MonoBehaviour, Provider
+{
+    [SerializeField] private List<GameObject> humanos = new List<GameObject>();
+    void Start()
+    {
         foreach (Humano humano in FindObjectsOfType(typeof(Humano)))
         {
             AddGO(humano.gameObject);
         }
+    }
+
+    /// <summary>
+    /// Obtiene la cantidad de humanos de la lista.
+    /// </summary>
+    /// <returns></returns>
+    public int GetCount()
+    {
+        return humanos.Count;
     }
 
     /// <summary>

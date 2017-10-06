@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\MovCamera.cs" />
     <Compile Include="Assets\Scripts\NPCs\Humano.cs" />
     <Compile Include="Assets\Scripts\NPCs\NPC.cs" />
     <Compile Include="Assets\Scripts\NPCs\Punto.cs" />
